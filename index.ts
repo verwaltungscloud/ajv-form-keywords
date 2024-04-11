@@ -3,6 +3,7 @@ import { allowedFileExtensionsDefinition } from "./src/keywords/fileupload/allow
 import { displayOptionsDefinition } from "./src/keywords/display/displayOptions.keyword";
 
 export { TDisplayOptions } from "./src/types/display/displayOptions.types";
+export { JSONSchemaTypeWithDisplayOptions } from "./src/types/display/JSONSchemaTypeWithDisplayOptions.types";
 
 export const fileUpload = {
 	maxFileSizeDefinition,
