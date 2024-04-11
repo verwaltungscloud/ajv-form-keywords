@@ -1,0 +1,27 @@
+{
+    "name": "@vcsh/ajv-form-keywords",
+    "version": "0.0.1",
+    "description": "ajv plugin for keywords that allow form generation from ajv schemas",
+    "types": "dist/index.d.ts",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/verwaltungscloud/ajv-form-keywords.git"
+    },
+    "keywords": [
+        "ajv"
+    ],
+    "author": "Verwaltungscloud.SH GmbH",
+    "license": "GPL-3.0-only",
+    "bugs": {
+        "url": "https://github.com/verwaltungscloud/ajv-form-keywords/issues"
+    },
+    "homepage": "https://github.com/verwaltungscloud/ajv-form-keywords#readme",
+    "dependencies": {
+        "ajv": "^8.12.0"
+    }
+}
