@@ -23,15 +23,20 @@ function fileUploadOptionsCompileFunction(
 		data: Array<{ filename: string; base64Uri: string }>
 	): boolean {
 		if (fileUploadOptions.allowedFileExtensions) {
-			const allowedFileExtensions =
-				fileUploadOptions.allowedFileExtensions as string;
+			const allowedFileExtensions = (
+				fileUploadOptions.allowedFileExtensions as string
+			)
+				.split(",")
+				.map((ext) => ext.trim().replace(".", ""));
+
 			const fileExtensions = data.map((file) =>
 				file.filename.split(".").pop()
 			);
 			for (const fileExtension of fileExtensions) {
-				const isAllowed = allowedFileExtensions.includes(
-					fileExtension || ""
+				const isAllowed = allowedFileExtensions.some(
+					(allowedExtension) => allowedExtension === fileExtension
 				);
+
 				if (!isAllowed) {
 					//@ts-expect-error this untyped
 					this.errors = new ValidationError([

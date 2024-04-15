@@ -83,8 +83,8 @@ describe("Test of fileUpload option keywords", () => {
 		const isValid = validate({
 			socialBenefits: [
 				{
-					filename: "test.png",
-					base64Uri: "data:image/png;base64,",
+					filename: "test.jp",
+					base64Uri: "data:image/jp;base64,",
 				},
 			],
 		});
