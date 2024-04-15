@@ -1,4 +1,5 @@
 import { TDisplayOptions } from "./displayOptions.types";
+import { TFileUploadOptions } from "./fileuploadOptions.types";
 
 type StrictNullChecksWrapper<Name extends string, Type> = undefined extends null
 	? `strictNullChecks must be true in tsconfig to use ${Name}`
@@ -37,8 +38,11 @@ interface StringKeywords {
 	pattern?: string;
 	format?: string;
 }
-type UncheckedJSONSchemaTypeWithDisplayOptions<T, IsPartial extends boolean> = ( // these two unions allow arbitrary unions of types
-	| {
+type UncheckedJSONSchemaTypeWithDisplayOptions<
+	T,
+	IsPartial extends boolean
+> = // these two unions allow arbitrary unions of types
+(| {
 			anyOf: readonly UncheckedJSONSchemaTypeWithDisplayOptions<
 				T,
 				IsPartial
@@ -199,9 +203,10 @@ type UncheckedJSONSchemaTypeWithDisplayOptions<T, IsPartial extends boolean> = (
 		string,
 		UncheckedJSONSchemaTypeWithDisplayOptions<Known, true>
 	>;
-	displayOptions?: TDisplayOptions;
+	display?: TDisplayOptions;
+	fileUpload?: TFileUploadOptions;
 };
-export type JSONSchemaTypeWithDisplayOptions<T> = StrictNullChecksWrapper<
+export type JSONSchemaTypeWithFormKeywords<T> = StrictNullChecksWrapper<
 	"JSONSchemaType",
 	UncheckedJSONSchemaTypeWithDisplayOptions<T, false>
 >;

@@ -1,31 +1,25 @@
-import { maxFileSizeDefinition } from "./src/keywords/fileupload/maxFileSize.keyword";
-import { allowedFileExtensionsDefinition } from "./src/keywords/fileupload/allowedFileExtensions.keyword";
 import { displayOptionsDefinition } from "./src/keywords/display/displayOptions.keyword";
 import Ajv, { Plugin } from "ajv";
+import { fileUploadOptionsDefinition } from "./src/keywords/fileupload/fileUploadOptions.keyword";
 
 export { TDisplayOptions } from "./src/types/display/displayOptions.types";
-export { JSONSchemaTypeWithDisplayOptions } from "./src/types/display/JSONSchemaTypeWithDisplayOptions.types";
+export { TFileUploadOptions } from "./src/types/display/fileuploadOptions.types";
+export { JSONSchemaTypeWithFormKeywords } from "./src/types/display/JSONSchemaTypeWithFormKeywords.types";
 
-export const fileUpload = {
-	maxFileSizeDefinition,
-	allowedFileExtensionsDefinition,
-};
-
-export const display = {
+export const keywords = {
 	displayOptionsDefinition,
+	fileUploadOptionsDefinition,
 };
 
 const formKeywordsPlugin: Plugin<{}> = (ajv: Ajv): Ajv => {
-	ajv.addKeyword("displayOptions", displayOptionsDefinition);
-	ajv.addKeyword("maxFileSize", maxFileSizeDefinition);
-	ajv.addKeyword("allowedFileExtensions", allowedFileExtensionsDefinition);
+	ajv.addKeyword("display", displayOptionsDefinition);
+	ajv.addKeyword("fileUpload", fileUploadOptionsDefinition);
 	return ajv;
 };
 
 export function addFormKeywords(ajv: Ajv): Ajv {
-	ajv.addKeyword("displayOptions", displayOptionsDefinition);
-	ajv.addKeyword("maxFileSize", maxFileSizeDefinition);
-	ajv.addKeyword("allowedFileExtensions", allowedFileExtensionsDefinition);
+	ajv.addKeyword("display", displayOptionsDefinition);
+	ajv.addKeyword("fileUpload", fileUploadOptionsDefinition);
 	return ajv;
 }
 
