@@ -33,9 +33,7 @@ function fileUploadOptionsCompileFunction(
 					fileExtension || ""
 				);
 				if (!isAllowed) {
-					console.log("hello");
-
-					//@ts-expect-error this
+					//@ts-expect-error this untyped
 					this.errors = new ValidationError([
 						{
 							keyword: "fileUpload.allowedFileExtensions",
@@ -53,7 +51,7 @@ function fileUploadOptionsCompileFunction(
 			for (const file of data) {
 				const fileSize = getBase64FileSize(file.base64Uri);
 				if (fileSize > maxFileSize) {
-					//@ts-expect-error this
+					//@ts-expect-error this untyped
 					this.errors = new ValidationError([
 						{
 							keyword: "fileUpload.maxFileSize",

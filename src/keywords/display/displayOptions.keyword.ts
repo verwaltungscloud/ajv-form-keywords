@@ -4,9 +4,10 @@ import { TDisplayOptions } from "../../types/display/displayOptions.types";
 const ajvMetaSchemaDisplayOptions: JSONSchemaType<TDisplayOptions> = {
 	type: "object",
 	additionalProperties: false,
+	required: ["name", "index"],
 	properties: {
-		name: { type: "string", nullable: true },
-		index: { type: "number", nullable: true },
+		name: { type: "string" },
+		index: { type: "number" },
 		description: { type: "string", nullable: true },
 		isUnprocessed: { type: "boolean", nullable: true },
 		grid: {
