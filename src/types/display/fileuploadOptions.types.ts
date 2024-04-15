@@ -1,4 +1,4 @@
 export type TFileUploadOptions = {
 	maxFileSize?: number;
-	allowedFileExtensions?: string[];
+	allowedFileExtensions?: string;
 };

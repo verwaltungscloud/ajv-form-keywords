@@ -25,7 +25,7 @@ function fileUploadOptionsCompileFunction(
 		return new Promise((resolve, reject) => {
 			if (fileUploadOptions.allowedFileExtensions) {
 				const allowedFileExtensions =
-					fileUploadOptions.allowedFileExtensions as string[];
+					fileUploadOptions.allowedFileExtensions as string;
 				const fileExtensions = data.map((file) =>
 					file.filename.split(".").pop()
 				);

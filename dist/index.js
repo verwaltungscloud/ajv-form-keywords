@@ -1,13 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.display = exports.fileUpload = void 0;
-const maxFileSize_keyword_1 = require("./src/keywords/fileupload/maxFileSize.keyword");
-const allowedFileExtensions_keyword_1 = require("./src/keywords/fileupload/allowedFileExtensions.keyword");
+exports.addFormKeywords = exports.keywords = void 0;
 const displayOptions_keyword_1 = require("./src/keywords/display/displayOptions.keyword");
-exports.fileUpload = {
-    maxFileSizeDefinition: maxFileSize_keyword_1.maxFileSizeDefinition,
-    allowedFileExtensionsDefinition: allowedFileExtensions_keyword_1.allowedFileExtensionsDefinition,
-};
-exports.display = {
+const fileUploadOptions_keyword_1 = require("./src/keywords/fileupload/fileUploadOptions.keyword");
+exports.keywords = {
     displayOptionsDefinition: displayOptions_keyword_1.displayOptionsDefinition,
+    fileUploadOptionsDefinition: fileUploadOptions_keyword_1.fileUploadOptionsDefinition,
 };
+const formKeywordsPlugin = (ajv) => {
+    ajv.addKeyword("display", displayOptions_keyword_1.displayOptionsDefinition);
+    ajv.addKeyword("fileUpload", fileUploadOptions_keyword_1.fileUploadOptionsDefinition);
+    return ajv;
+};
+function addFormKeywords(ajv) {
+    ajv.addKeyword("display", displayOptions_keyword_1.displayOptionsDefinition);
+    ajv.addKeyword("fileUpload", fileUploadOptions_keyword_1.fileUploadOptionsDefinition);
+    return ajv;
+}
+exports.addFormKeywords = addFormKeywords;
+exports.default = formKeywordsPlugin;

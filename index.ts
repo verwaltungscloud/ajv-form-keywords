@@ -12,14 +12,14 @@ export const keywords = {
 };
 
 const formKeywordsPlugin: Plugin<{}> = (ajv: Ajv): Ajv => {
-	ajv.addKeyword("display", displayOptionsDefinition);
-	ajv.addKeyword("fileUpload", fileUploadOptionsDefinition);
+	ajv.addKeyword(displayOptionsDefinition);
+	ajv.addKeyword(fileUploadOptionsDefinition);
 	return ajv;
 };
 
 export function addFormKeywords(ajv: Ajv): Ajv {
-	ajv.addKeyword("display", displayOptionsDefinition);
-	ajv.addKeyword("fileUpload", fileUploadOptionsDefinition);
+	ajv.addKeyword(displayOptionsDefinition);
+	ajv.addKeyword(fileUploadOptionsDefinition);
 	return ajv;
 }
 

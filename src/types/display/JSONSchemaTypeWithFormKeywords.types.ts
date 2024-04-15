@@ -9,12 +9,12 @@ type UnionToIntersection<U> = (U extends any ? (_: U) => void : never) extends (
 ) => void
 	? I
 	: never;
-export type SomeJSONSchema = UncheckedJSONSchemaTypeWithDisplayOptions<
+export type SomeJSONSchema = UncheckedJSONSchemaTypeWithFormKeywords<
 	Known,
 	true
 >;
 type UncheckedPartialSchema<T> = Partial<
-	UncheckedJSONSchemaTypeWithDisplayOptions<T, true>
+	UncheckedJSONSchemaTypeWithFormKeywords<T, true>
 >;
 export type PartialSchema<T> = StrictNullChecksWrapper<
 	"PartialSchema",
@@ -38,18 +38,15 @@ interface StringKeywords {
 	pattern?: string;
 	format?: string;
 }
-type UncheckedJSONSchemaTypeWithDisplayOptions<
-	T,
-	IsPartial extends boolean
-> = // these two unions allow arbitrary unions of types
-(| {
-			anyOf: readonly UncheckedJSONSchemaTypeWithDisplayOptions<
+type UncheckedJSONSchemaTypeWithFormKeywords<T, IsPartial extends boolean> = ( // these two unions allow arbitrary unions of types
+	| {
+			anyOf: readonly UncheckedJSONSchemaTypeWithFormKeywords<
 				T,
 				IsPartial
 			>[];
 	  }
 	| {
-			oneOf: readonly UncheckedJSONSchemaTypeWithDisplayOptions<
+			oneOf: readonly UncheckedJSONSchemaTypeWithFormKeywords<
 				T,
 				IsPartial
 			>[];
@@ -87,7 +84,7 @@ type UncheckedJSONSchemaTypeWithDisplayOptions<
 			? {
 					type: JSONType<"array", IsPartial>;
 					items: {
-						readonly [K in keyof T]-?: UncheckedJSONSchemaTypeWithDisplayOptions<
+						readonly [K in keyof T]-?: UncheckedJSONSchemaTypeWithFormKeywords<
 							T[K],
 							false
 						> &
@@ -107,10 +104,7 @@ type UncheckedJSONSchemaTypeWithDisplayOptions<
 			: T extends readonly any[]
 			? {
 					type: JSONType<"array", IsPartial>;
-					items: UncheckedJSONSchemaTypeWithDisplayOptions<
-						T[0],
-						false
-					>;
+					items: UncheckedJSONSchemaTypeWithFormKeywords<T[0], false>;
 					contains?: UncheckedPartialSchema<T[0]>;
 					minItems?: number;
 					maxItems?: number;
@@ -124,13 +118,13 @@ type UncheckedJSONSchemaTypeWithDisplayOptions<
 					type: JSONType<"object", IsPartial>;
 					additionalProperties?:
 						| boolean
-						| UncheckedJSONSchemaTypeWithDisplayOptions<
+						| UncheckedJSONSchemaTypeWithFormKeywords<
 								T[string],
 								false
 						  >;
 					unevaluatedProperties?:
 						| boolean
-						| UncheckedJSONSchemaTypeWithDisplayOptions<
+						| UncheckedJSONSchemaTypeWithFormKeywords<
 								T[string],
 								false
 						  >;
@@ -139,16 +133,13 @@ type UncheckedJSONSchemaTypeWithDisplayOptions<
 						: UncheckedPropertiesSchema<T>;
 					patternProperties?: Record<
 						string,
-						UncheckedJSONSchemaTypeWithDisplayOptions<
+						UncheckedJSONSchemaTypeWithFormKeywords<
 							T[string],
 							false
 						>
 					>;
 					propertyNames?: Omit<
-						UncheckedJSONSchemaTypeWithDisplayOptions<
-							string,
-							false
-						>,
+						UncheckedJSONSchemaTypeWithFormKeywords<string, false>,
 						"type"
 					> & {
 						type?: "string";
@@ -197,18 +188,18 @@ type UncheckedJSONSchemaTypeWithDisplayOptions<
 	$ref?: string;
 	$defs?: Record<
 		string,
-		UncheckedJSONSchemaTypeWithDisplayOptions<Known, true>
+		UncheckedJSONSchemaTypeWithFormKeywords<Known, true>
 	>;
 	definitions?: Record<
 		string,
-		UncheckedJSONSchemaTypeWithDisplayOptions<Known, true>
+		UncheckedJSONSchemaTypeWithFormKeywords<Known, true>
 	>;
 	display?: TDisplayOptions;
 	fileUpload?: TFileUploadOptions;
 };
 export type JSONSchemaTypeWithFormKeywords<T> = StrictNullChecksWrapper<
 	"JSONSchemaType",
-	UncheckedJSONSchemaTypeWithDisplayOptions<T, false>
+	UncheckedJSONSchemaTypeWithFormKeywords<T, false>
 >;
 type Known =
 	| {
@@ -222,7 +213,7 @@ type Known =
 	| null;
 type UncheckedPropertiesSchema<T> = {
 	[K in keyof T]-?:
-		| (UncheckedJSONSchemaTypeWithDisplayOptions<T[K], false> &
+		| (UncheckedJSONSchemaTypeWithFormKeywords<T[K], false> &
 				Nullable<T[K]>)
 		| {
 				$ref: string;
