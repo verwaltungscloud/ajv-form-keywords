@@ -1,6 +1,6 @@
 export type TDisplayOptions = {
-	name?: string;
-	index?: number;
+	name: string;
+	index: number;
 	isUnprocessed?: boolean;
 	description?: string;
 	grid?: {

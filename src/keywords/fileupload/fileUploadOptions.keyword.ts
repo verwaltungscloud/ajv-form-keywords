@@ -21,49 +21,51 @@ function fileUploadOptionsCompileFunction(
 ) {
 	return function (
 		data: Array<{ filename: string; base64Uri: string }>
-	): Promise<boolean> {
-		return new Promise((resolve, reject) => {
-			if (fileUploadOptions.allowedFileExtensions) {
-				const allowedFileExtensions =
-					fileUploadOptions.allowedFileExtensions as string;
-				const fileExtensions = data.map((file) =>
-					file.filename.split(".").pop()
+	): boolean {
+		if (fileUploadOptions.allowedFileExtensions) {
+			const allowedFileExtensions =
+				fileUploadOptions.allowedFileExtensions as string;
+			const fileExtensions = data.map((file) =>
+				file.filename.split(".").pop()
+			);
+			for (const fileExtension of fileExtensions) {
+				const isAllowed = allowedFileExtensions.includes(
+					fileExtension || ""
 				);
-				fileExtensions.map((fileExtension) => {
-					const isAllowed = allowedFileExtensions.includes(
-						fileExtension || ""
-					);
-					if (!isAllowed) {
-						reject(
-							new ValidationError([
-								{
-									keyword: "fileUpload.allowedFileExtensions",
-									message: `File extension not allowed: ${fileExtension}`,
-								},
-							])
-						);
-					}
-				});
-			}
+				if (!isAllowed) {
+					console.log("hello");
 
-			if (fileUploadOptions.maxFileSize) {
-				const maxFileSize = fileUploadOptions.maxFileSize as number;
-				for (const file of data) {
-					const fileSize = getBase64FileSize(file.base64Uri);
-					if (fileSize > maxFileSize) {
-						reject(
-							new ValidationError([
-								{
-									keyword: "fileUpload.maxFileSize",
-									message: `File size for file ${file.filename} too large: ${fileSize} Bytes, max allowed: ${maxFileSize} Bytes`,
-								},
-							])
-						);
-					}
+					//@ts-expect-error this
+					this.errors = new ValidationError([
+						{
+							keyword: "fileUpload.allowedFileExtensions",
+							message: `File extension not allowed: ${fileExtension}`,
+							params: {},
+						},
+					]);
+					return false;
 				}
 			}
-			resolve(true);
-		});
+		}
+
+		if (fileUploadOptions.maxFileSize) {
+			const maxFileSize = fileUploadOptions.maxFileSize as number;
+			for (const file of data) {
+				const fileSize = getBase64FileSize(file.base64Uri);
+				if (fileSize > maxFileSize) {
+					//@ts-expect-error this
+					this.errors = new ValidationError([
+						{
+							keyword: "fileUpload.maxFileSize",
+							message: `File size for file ${file.filename} too large: ${fileSize} Bytes, max allowed: ${maxFileSize} Bytes`,
+							params: {},
+						},
+					]);
+					return false;
+				}
+			}
+		}
+		return true;
 	};
 }
 
