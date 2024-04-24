@@ -6,7 +6,7 @@ import Ajv from "ajv";
 describe("Test of fileUpload option keywords", () => {
 	it("should return valid (fileUpload)", () => {
 		const ajv = new Ajv();
-		addFormKeywords(ajv);
+		addFormKeywords(ajv, { includeFileUploadValidationFunctions: true });
 
 		const isValid = ajv.validate(
 			{
@@ -51,7 +51,7 @@ describe("Test of fileUpload option keywords", () => {
 
 	it("should fail because of unallowed fileextension (fileUpload)", () => {
 		const ajv = new Ajv();
-		addFormKeywords(ajv);
+		addFormKeywords(ajv, { includeFileUploadValidationFunctions: true });
 		const validate = ajv.compile({
 			type: "object",
 			required: ["socialBenefits"],
