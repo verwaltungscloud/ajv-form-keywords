@@ -72,7 +72,12 @@ function fileUploadOptionsCompileFunction(
 	};
 }
 
-export const fileUploadOptionsDefinition: KeywordDefinition = {
+export const fileUploadOptionsDefinitionWithoutCompile: KeywordDefinition = {
+	keyword: "fileUpload",
+	metaSchema: ajvMetaSchemaFileUploadOptions,
+};
+
+export const fileUploadOptionsDefinitionWithCompile: KeywordDefinition = {
 	keyword: "fileUpload",
 	metaSchema: ajvMetaSchemaFileUploadOptions,
 	compile: fileUploadOptionsCompileFunction,
