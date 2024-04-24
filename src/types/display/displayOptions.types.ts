@@ -48,6 +48,7 @@ export type TDisplayOptions = {
 		minDate?: string;
 		maxDate?: string;
 		monthPicker?: boolean;
+		suffix?: string;
 		//notype (info text)
 		asInfo?: boolean;
 	};

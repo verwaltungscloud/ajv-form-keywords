@@ -105,6 +105,7 @@ const ajvMetaSchemaDisplayOptions: JSONSchemaType<TDisplayOptions> = {
 				minDate: { type: "string", nullable: true },
 				maxDate: { type: "string", nullable: true },
 				monthPicker: { type: "boolean", nullable: true },
+				suffix: { type: "string", nullable: true },
 				asInfo: { type: "boolean", nullable: true },
 			},
 		},
