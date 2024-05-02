@@ -28,7 +28,8 @@ export type TDisplayOptions = {
 		//boolean in terms_and_conditions step
 		links?: {
 			linkText: string;
-			html: string;
+			html?: string;
+			url?: string;
 		}[];
 		//numbers
 		/**

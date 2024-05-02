@@ -60,10 +60,11 @@ const ajvMetaSchemaDisplayOptions: JSONSchemaType<TDisplayOptions> = {
 					items: {
 						type: "object",
 						additionalProperties: false,
-						required: ["linkText", "html"],
+						required: ["linkText"],
 						properties: {
 							linkText: { type: "string" },
-							html: { type: "string" },
+							html: { type: "string", nullable: true },
+							url: { type: "string", nullable: true },
 						},
 					},
 				},
