@@ -52,5 +52,6 @@ export type TDisplayOptions = {
 		hiddenSuffix?: string;
 		//notype (info text)
 		asInfo?: boolean;
+		asHeading?: boolean;
 	};
 };

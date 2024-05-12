@@ -108,6 +108,7 @@ const ajvMetaSchemaDisplayOptions: JSONSchemaType<TDisplayOptions> = {
 				monthPicker: { type: "boolean", nullable: true },
 				hiddenSuffix: { type: "string", nullable: true },
 				asInfo: { type: "boolean", nullable: true },
+				asHeading: { type: "boolean", nullable: true },
 			},
 		},
 	},
