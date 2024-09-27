@@ -109,6 +109,7 @@ const ajvMetaSchemaDisplayOptions: JSONSchemaType<TDisplayOptions> = {
 				hiddenSuffix: { type: "string", nullable: true },
 				asInfo: { type: "boolean", nullable: true },
 				asHeading: { type: "boolean", nullable: true },
+				step: { type: "string", nullable: true },
 			},
 		},
 	},
