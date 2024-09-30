@@ -110,6 +110,7 @@ const ajvMetaSchemaDisplayOptions: JSONSchemaType<TDisplayOptions> = {
 				asInfo: { type: "boolean", nullable: true },
 				asHeading: { type: "boolean", nullable: true },
 				step: { type: "string", nullable: true },
+				asStepReference: { type: "boolean", nullable: true },
 			},
 		},
 	},
